@@ -1,25 +1,25 @@
-# Use the official Node.js image as the base image
-FROM ubuntu
+# Use centos7 as base image
+FROM centos:7
 
-# Set the working directory
-WORKDIR /my-worker
+# Install curl, nodejs and npm
+RUN yum install -y curl
+RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+RUN yum install -y nodejs
 
-RUN cd /my-worker && apt-get update && apt-get install -y nodejs npm
+# Install @cloudflare/wrangler globally
+RUN npm install -g @cloudflare/wrangler
 
-# Copy the package.json and package-lock.json files
-COPY package.json ./
+# Copy worker.js file to container
+COPY worker.js /worker.js
 
-# Copy the worker.js file
-COPY worker.js ./
+# Generate and publish worker using wrangler
+RUN wrangler generate my-worker
+RUN cp /worker.js /my-worker/index.js
+RUN wrangler publish --env production
 
-# Install the dependencies
-RUN npm init -y && npm install cloudflare-worker-local
+# Install nginx and configure it to proxy worker to port 80
+RUN yum install -y nginx
+RUN echo 'server { listen 80; location / { proxy_pass http://127.0.0.1:8787; } }' > /etc/nginx/conf.d/default.conf
 
-# Set the default port to 80
-ENV PORT 80
-
-# Expose the port specified by the PORT environment variable
-EXPOSE $PORT
-
-# Start the workerd server on the port specified by the PORT environment variable
-CMD ["npx", "cloudflare-worker-local", "worker.js", "localhost", "$PORT"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
