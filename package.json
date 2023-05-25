@@ -1,14 +1,14 @@
 {
   "name": "my-worker",
   "version": "1.0.0",
-  "description": "",
+  "description": "run CloudFlare Workers code with Dockerfile",
   "main": "worker.js",
   "scripts": {
-    "start": "cloudflare-worker-local worker.js localhost 3000"
+    "start": "cloudflare-worker-local worker.js localhost $PORT"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ['CloudFlare', 'Workers', 'Dockerfile', 'Ubuntu'],
+  "author": "David Deng",
+  "license": "MIT",
   "dependencies": {
     "cloudflare-worker-local": "^1.2.3"
   }
