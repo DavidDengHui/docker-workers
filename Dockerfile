@@ -15,7 +15,6 @@ COPY worker.js ./
 
 # Install and set libc++.so.1
 RUN apt-get update && apt-get install -y libc++-dev
-ENV LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu # This is the default path for libc++.so.1, you may need to change it if it's different on your system
 
 # Expose port 3000
 EXPOSE 3000
