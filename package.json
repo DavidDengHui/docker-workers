@@ -1,0 +1,15 @@
+{
+  "name": "my-worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "worker.js",
+  "scripts": {
+    "start": "cloudflare-worker-local worker.js localhost 3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cloudflare-worker-local": "^1.2.3"
+  }
+}
