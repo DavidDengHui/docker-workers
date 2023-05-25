@@ -16,10 +16,10 @@ COPY worker.js ./
 RUN npm init -y && npm install cloudflare-worker-local
 
 # Set the default port to 80
-ENV PORT 80
+# ENV PORT 80
 
 # Expose the port specified by the PORT environment variable
-EXPOSE $PORT
+# EXPOSE $PORT
 
 # Start the workerd server on the port specified by the PORT environment variable
-CMD ["npx", "cloudflare-worker-local", "worker.js", "localhost", "$PORT"]
+CMD ["npx", "cloudflare-worker-local", "worker.js", "localhost", "3000"]
