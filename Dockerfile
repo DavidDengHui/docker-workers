@@ -13,11 +13,11 @@ RUN npm install
 # Copy the worker.js file
 COPY worker.js ./
 
-# Install and set libc++.so.1
-RUN apt-get update && apt-get install -y libc++-dev
+# Install and set libc++.so.1 libunwind.so.1
+RUN apt-get update && apt-get install -y libc++-dev libunwind-dev
 
-# Expose port 3000
-EXPOSE 3000
+# Expose port 80
+EXPOSE 80
 
 # Start the workerd server
-CMD ["npx", "workerd", "worker.js", "localhost", "3000"]
+CMD ["npx", "workerd", "worker.js", "localhost", "80"]
