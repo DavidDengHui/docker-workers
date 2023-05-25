@@ -13,11 +13,14 @@ RUN npm install
 # Copy the worker.js file
 COPY worker.js ./
 
-# Install and set libc++.so.1 libunwind.so.1
+# Install and set libc++.so.1 and libunwind.so.1
 RUN apt-get update && apt-get install -y libc++-dev libunwind-dev
 
-# Expose port 80
-EXPOSE 80
+# Set the default port to 80
+ENV PORT 80
 
-# Start the workerd server
-CMD ["npx", "workerd", "worker.js", "localhost", "80"]
+# Expose the port specified by the PORT environment variable
+EXPOSE $PORT
+
+# Start the workerd server on the port specified by the PORT environment variable
+CMD ["npx", "workerd", "worker.js", "localhost", "$PORT"]
