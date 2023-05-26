@@ -11,7 +11,7 @@ WORKDIR /app
 COPY worker.js .
 
 # 暴露80端口
-EXPOSE 80
+EXPOSE 8080
 
 # 运行cloudflare-worker-local命令，指定worker.js文件和端口号
-CMD ["cloudflare-worker-local", "worker.js", "localhost:3000", "80"]
+CMD ["cloudflare-worker-local", "worker.js", "localhost:3000", "8080"]
