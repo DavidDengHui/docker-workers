@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 
 # Copy the worker.js file
 COPY worker.js ./
+COPY index.js ./
 
 # Set the default port
 ENV PORT 8080
@@ -14,5 +15,5 @@ ENV PORT 8080
 # Expose the port specified by the PORT environment variable
 EXPOSE $PORT
 
-# Run Miniflare 2.0 on port 8787
+# Run Miniflare 2.0 on port
 CMD ["miniflare", "worker.js", "-p", "$PORT"]
