@@ -1,17 +1,17 @@
-# 使用node 16作为基础镜像
+# Use the official Node.js 16 image
 FROM node:16
 
-# 安装cloudflare-worker-local
-RUN npm install -g cloudflare-worker-local
+# Create and change to the app directory
+WORKDIR /usr/src/app
 
-# 创建工作目录
-WORKDIR /app
-
-# 复制worker.js文件到工作目录
+# Copy the worker.js file
 COPY worker.js .
 
-# 暴露80端口
-EXPOSE 8080
+# Install Miniflare 2.0 globally
+RUN npm install -g miniflare
 
-# 运行cloudflare-worker-local命令，指定worker.js文件和端口号
-CMD ["cloudflare-worker-local", "worker.js", "localhost:3000", "8080"]
+# Expose port 8787
+EXPOSE 8787
+
+# Run Miniflare 2.0 on port 8787
+CMD ["miniflare", "worker.js", "-p", "8787"]
