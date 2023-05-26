@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # Copy the worker.js file
 COPY worker.js ./
 
-Set the default port
+# Set the default port
 ENV PORT 8080
 
 Expose the port specified by the PORT environment variable
